@@ -4,32 +4,40 @@ document.addEventListener("DOMContentLoaded", () => {
     const enterBtn = document.getElementById("enterBtn");
     const welcomeScreen = document.getElementById("welcomeScreen");
 
-    // 1. Cuando hacen clic en "Abrir Invitación"
-    enterBtn.addEventListener("click", () => {
-        // Intentamos reproducir el audio (el navegador lo dejará porque hubo un clic)
-        music.play()
-            .then(() => {
-                // Ocultamos la pantalla de bienvenida
-                welcomeScreen.style.display = "none";
-                musicBtn.innerHTML = "🔇 Pausar Música";
-            })
-            .catch(error => {
-                console.error("Error al reproducir automáticamente:", error);
-                // Si falla por algo, igual dejamos entrar al usuario
-                welcomeScreen.style.display = "none";
-            });
-    });
+    if (musicBtn) musicBtn.innerHTML = "🎵 Música";
 
-    // 2. Tu botón clásico de Pausa/Play por si quieren silenciarla después
-    musicBtn.addEventListener("click", () => {
-        if (music.paused) {
-            music.play();
-            musicBtn.innerHTML = "🔇 Pausar Música";
-        } else {
-            music.pause();
-            musicBtn.innerHTML = "🎵 Música";
+    // Al presionar "Abrir Invitación"
+    enterBtn.addEventListener("click", () => {
+        // Quitamos la capa difuminada inmediatamente
+        if (welcomeScreen) {
+            welcomeScreen.style.display = "none";
+        }
+
+        // Encendemos la música en segundo plano
+        if (music) {
+            music.play()
+                .then(() => {
+                    if (musicBtn) musicBtn.innerHTML = "🔇 Pausar Música";
+                })
+                .catch(error => {
+                    console.warn("Autoplay bloqueado por el navegador, se requiere acción manual:", error);
+                    if (musicBtn) musicBtn.innerHTML = "🎵 Play Música";
+                });
         }
     });
+
+    // Control manual del botón de la esquina
+    if (musicBtn) {
+        musicBtn.addEventListener("click", () => {
+            if (music.paused) {
+                music.play();
+                musicBtn.innerHTML = "🔇 Pausar Música";
+            } else {
+                music.pause();
+                musicBtn.innerHTML = "🎵 Música";
+            }
+        });
+    }
 });
 
 // =====================
