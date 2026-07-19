@@ -37,14 +37,18 @@ body{
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px); /* Especial para iPhone/Safari */
     
-    /* Centrar el botón vertical y horizontalmente */
-    display: flex;
+    /* CENTRADO ABSOLUTO DEL CONTENIDO */
+    display: flex !important; /* Forzamos el flexbox */
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center;     /* Centrado vertical */
     z-index: 9999;
 }
-
+.welcome-layer.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
 /* Botón principal (Abrir Invitación) */
 .btn-primary {
     padding: 14px 28px;
