@@ -1,21 +1,33 @@
-const music = document.getElementById("bgMusic");
-const button = document.getElementById("musicBtn");
+// Envolvemos todo para asegurarnos de que el HTML ya cargó por completo
+document.addEventListener("DOMContentLoaded", () => {
+    const music = document.getElementById("bgMusic");
+    const button = document.getElementById("musicBtn");
 
-button.addEventListener("click", () => {
-    // Le preguntamos directamente al elemento si está pausado
-    if (music.paused) {
-        music.play()
-            .then(() => {
-                button.innerHTML = "🔇 Pausar Música";
-            })
-            .catch(error => {
-                console.error("El navegador bloqueó la reproducción:", error);
-                alert("Por favor, interactúa con la página primero para reproducir la música.");
-            });
-    } else {
-        music.pause();
-        button.innerHTML = "🎵 Música";
+    // Verificación de seguridad en la consola
+    console.log("¿Botón detectado?:", button);
+    console.log("¿Audio detectado?:", music);
+
+    if (!music || !button) {
+        console.error("Error: No se encontró el botón o el audio en el HTML. Revisa los IDs.");
+        return;
     }
+
+    button.addEventListener("click", () => {
+        if (music.paused) {
+            music.play()
+                .then(() => {
+                    button.innerHTML = "🔇 Pausar Música";
+                    console.log("¡Música sonando correctamente!");
+                })
+                .catch(error => {
+                    console.error("Error al reproducir el audio:", error);
+                });
+        } else {
+            music.pause();
+            button.innerHTML = "🎵 Música";
+            console.log("Música pausada por el usuario.");
+        }
+    });
 });
 
 // =====================
