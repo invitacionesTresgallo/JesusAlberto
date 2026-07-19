@@ -1,24 +1,21 @@
 const music = document.getElementById("bgMusic");
 const button = document.getElementById("musicBtn");
 
-let playing = false;
-
 button.addEventListener("click", () => {
-
-    if(!playing){
-
-        music.play();
-        button.innerHTML = "🔇 Pausar Música";
-        playing = true;
-
-    }else{
-
+    // Le preguntamos directamente al elemento si está pausado
+    if (music.paused) {
+        music.play()
+            .then(() => {
+                button.innerHTML = "🔇 Pausar Música";
+            })
+            .catch(error => {
+                console.error("El navegador bloqueó la reproducción:", error);
+                alert("Por favor, interactúa con la página primero para reproducir la música.");
+            });
+    } else {
         music.pause();
         button.innerHTML = "🎵 Música";
-        playing = true;
-
     }
-
 });
 
 // =====================
