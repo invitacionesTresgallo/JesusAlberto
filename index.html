@@ -18,42 +18,24 @@
 </head>
 
 <body>
-    <div id="welcomeScreen" style="
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(255, 255, 255, 0.65); /* Blanco con 65% de opacidad */
-    backdrop-filter: blur(10px);                  /* Difumina elegantemente lo de abajo */
-    -webkit-backdrop-filter: blur(10px);          /* Compatibilidad con Safari/iPhone */
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    z-index: 9999;
-">
-    <h2 style="color: #333; margin-bottom: 20px;">¡Bienvenidos!</h2>
-    <!-- Tu botón para abrir e iniciar la música -->
-    <button id="enterBtn" style="padding: 14px 28px; font-size: 16px; border-radius: 20px; border: none; background-color: #000; color: #fff; cursor: pointer; box-shadow: 0px 4px 10px rgba(0,0,0,0.15);">
-        📩 Abrir Invitación
-    </button>
-</div>
+    <!-- 1. Capa de bienvenida transparente -->
+    <div id="welcomeScreen" class="welcome-layer">
+        <h2>¡Bienvenidos!</h2>
+        <button id="enterBtn" class="btn-primary">📩 Abrir Invitación</button>
+    </div>
 
-<!-- 2. EL CONTENIDO DE TU INVITACIÓN -->
+    <!-- 2. Contenido real de tu invitación -->
+    <main class="invitation-content">
+        
 
+        <!-- Botón flotante para pausar/reproducir -->
+        <button id="musicBtn" class="btn-floating">🎵 Música</button>
+    </main>
 
-<!-- 3. EL REPRODUCTOR OCULTO -->
-<audio id="bgMusic" loop preload="auto">
-    <source src="audio/cancion.mp3" type="audio/mpeg">
-</audio>
-    <button id="musicBtn">
-    🎵 Música
-</button>
-
-<audio id="bgMusic" loop>
-    <source src="audio/cancion.mp3" type="audio/mpeg">
-</audio>
+    <!-- 3. Reproductor de audio oculto -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="audio/cancion.mp3" type="audio/mpeg">
+    </audio>
     <!-- DESTELLOS -->
     <div class="sparkles">
         <span></span>
