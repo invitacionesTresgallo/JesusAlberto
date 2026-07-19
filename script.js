@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Al presionar "Abrir Invitación"
     enterBtn.addEventListener("click", () => {
-        // Quitamos la capa difuminada inmediatamente
+        // Quitamos la capa difuminada añadiendo la clase .hidden
         if (welcomeScreen) {
-            welcomeScreen.style.display = "none";
+            welcomeScreen.classList.add("hidden");
         }
 
         // Encendemos la música en segundo plano
