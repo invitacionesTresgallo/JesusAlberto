@@ -1,31 +1,33 @@
-// Envolvemos todo para asegurarnos de que el HTML ya cargó por completo
 document.addEventListener("DOMContentLoaded", () => {
     const music = document.getElementById("bgMusic");
-    const button = document.getElementById("musicBtn");
+    const musicBtn = document.getElementById("musicBtn");
+    const enterBtn = document.getElementById("enterBtn");
+    const welcomeScreen = document.getElementById("welcomeScreen");
 
-    // Verificación de seguridad en la consola
-    console.log("¿Botón detectado?:", button);
-    console.log("¿Audio detectado?:", music);
+    // 1. Cuando hacen clic en "Abrir Invitación"
+    enterBtn.addEventListener("click", () => {
+        // Intentamos reproducir el audio (el navegador lo dejará porque hubo un clic)
+        music.play()
+            .then(() => {
+                // Ocultamos la pantalla de bienvenida
+                welcomeScreen.style.display = "none";
+                musicBtn.innerHTML = "🔇 Pausar Música";
+            })
+            .catch(error => {
+                console.error("Error al reproducir automáticamente:", error);
+                // Si falla por algo, igual dejamos entrar al usuario
+                welcomeScreen.style.display = "none";
+            });
+    });
 
-    if (!music || !button) {
-        console.error("Error: No se encontró el botón o el audio en el HTML. Revisa los IDs.");
-        return;
-    }
-
-    button.addEventListener("click", () => {
+    // 2. Tu botón clásico de Pausa/Play por si quieren silenciarla después
+    musicBtn.addEventListener("click", () => {
         if (music.paused) {
-            music.play()
-                .then(() => {
-                    button.innerHTML = "🔇 Pausar Música";
-                    console.log("¡Música sonando correctamente!");
-                })
-                .catch(error => {
-                    console.error("Error al reproducir el audio:", error);
-                });
+            music.play();
+            musicBtn.innerHTML = "🔇 Pausar Música";
         } else {
             music.pause();
-            button.innerHTML = "🎵 Música";
-            console.log("Música pausada por el usuario.");
+            musicBtn.innerHTML = "🎵 Música";
         }
     });
 });
