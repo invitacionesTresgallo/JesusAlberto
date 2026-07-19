@@ -1,3 +1,26 @@
+const music = document.getElementById("bgMusic");
+const button = document.getElementById("musicBtn");
+
+let playing = false;
+
+button.addEventListener("click", () => {
+
+    if(!playing){
+
+        music.play();
+        button.innerHTML = "🔇 Pausar Música";
+        playing = true;
+
+    }else{
+
+        music.pause();
+        button.innerHTML = "🎵 Música";
+        playing = false;
+
+    }
+
+});
+
 // =====================
 // CUENTA REGRESIVA
 // =====================
