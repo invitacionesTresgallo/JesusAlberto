@@ -15,7 +15,7 @@ button.addEventListener("click", () => {
 
         music.pause();
         button.innerHTML = "🎵 Música";
-        playing = false;
+        playing = true;
 
     }
 
